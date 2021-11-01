@@ -14,7 +14,7 @@ use Illuminate\Support\Facades\Hash;
 class UserController extends Controller
 {
     
-    use PasswordValidationRules
+    use PasswordValidationRules;
     
     public function login(Request $request)
     {
@@ -51,7 +51,7 @@ class UserController extends Controller
         }
     }
     
-    public function regioster(Request $request)
+    public function register(Request $request)
     {
         try {
             $request->validate([
@@ -92,6 +92,11 @@ class UserController extends Controller
         $token = $request->user()->currentAccessToken()->delete();
 
         return ResponseFormatter::succes($token, 'Token Revoked');
+    }
+
+    public function fetch(Request $request)
+    {
+        return ResponseFormatter::success($request->user(), 'Data profile user berhasil diambil');
     }
 
     public function updateProfile(Request $request)
